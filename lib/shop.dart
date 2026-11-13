@@ -13,7 +13,7 @@ class Shop {
     required this.lat,
   });
 
-  factory Shop.fromJson(Map<String, dynamic> data){
+  factory Shop.fromJson(Map<String, dynamic> data) {
     return Shop(
       id: data['id'] as int,
       name: data['name'] as String,
@@ -21,5 +21,10 @@ class Shop {
       long: (data['long'] as num).toDouble(),
       lat: (data['lat'] as num).toDouble(),
     );
+  }
+
+  @override
+  String toString() {
+    return 'Shop name: $name, Address: $address.';
   }
 }
