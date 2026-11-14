@@ -2,15 +2,15 @@ class Shop {
   final int id;
   final String name;
   final String address;
-  final double long;
   final double lat;
+  final double long;
 
   Shop({
     required this.id,
     required this.name,
     required this.address,
-    required this.long,
     required this.lat,
+    required this.long,
   });
 
   factory Shop.fromJson(Map<String, dynamic> data) {
@@ -18,8 +18,8 @@ class Shop {
       id: data['id'] as int,
       name: data['name'] as String,
       address: data['address'] as String,
-      long: (data['long'] as num).toDouble(),
       lat: (data['lat'] as num).toDouble(),
+      long: (data['long'] as num).toDouble(),
     );
   }
 
