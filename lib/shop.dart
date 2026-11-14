@@ -14,6 +14,16 @@ class Shop {
   });
 
   factory Shop.fromJson(Map<String, dynamic> data) {
+    const requiredKeys = ['id', 'name', 'address', 'lat', 'long'];
+    for (final key in requiredKeys) {
+      if (!data.containsKey(key)) {
+        throw FormatException('Shop JSON missing "$key"');
+      }
+      if (data[key] == null) {
+        throw FormatException('Shop JSON "$key" field is null');
+      }
+    }
+
     return Shop(
       id: data['id'] as int,
       name: data['name'] as String,

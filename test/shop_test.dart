@@ -2,7 +2,6 @@ import 'package:sippt/shop.dart';
 import 'package:test/test.dart';
 
 void main() {
-
   test('supplying integers successfully makes double using Shop.fromJson', () {
     const data = {
       'id': 1,
@@ -39,12 +38,12 @@ void main() {
   test('missing field throws an error', () {
     const noNameData = {
       'id': 1,
-      'address': '800 Boylston St., Boston, MA, 02199',
+      'address': null,
+      'name': 'My Cozy Cafe',
       'lat': 42.22,
       'long': -71.06,
     };
 
-    expect(() => Shop.fromJson(noNameData), 
-      throwsA(isA<TypeError>()));
+    expect(() => Shop.fromJson(noNameData), throwsA(isA<FormatException>()));
   });
 }
