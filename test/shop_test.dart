@@ -9,13 +9,13 @@ void main() {
       'name': 'My Cozy Cafe',
       'address': '800 Boylston St., Boston, MA, 02199',
       'lat': 42.22,
-      'long': 79,
+      'long': -71,
     };
 
     final shop = Shop.fromJson(data);
 
     expect(shop.long, isA<double>());
-    expect(shop.long, equals(79.0));
+    expect(shop.long, equals(-71.0));
   });
 
   test('every json value maps properly to the Shop fields', () {
@@ -24,7 +24,7 @@ void main() {
       'name': 'My Cozy Cafe',
       'address': '800 Boylston St., Boston, MA, 02199',
       'lat': 42.22,
-      'long': 79.91,
+      'long': -71.06,
     };
 
     final shop = Shop.fromJson(data);
@@ -33,6 +33,18 @@ void main() {
     expect(shop.name, equals('My Cozy Cafe'));
     expect(shop.address, equals('800 Boylston St., Boston, MA, 02199'));
     expect(shop.lat, equals(42.22));
-    expect(shop.long, equals(79.91));
+    expect(shop.long, equals(-71.06));
+  });
+
+  test('missing field throws an error', () {
+    const noNameData = {
+      'id': 1,
+      'address': '800 Boylston St., Boston, MA, 02199',
+      'lat': 42.22,
+      'long': -71.06,
+    };
+
+    expect(() => Shop.fromJson(noNameData), 
+      throwsA(isA<TypeError>()));
   });
 }
