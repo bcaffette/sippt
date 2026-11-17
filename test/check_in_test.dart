@@ -11,7 +11,7 @@ void main() {
         -71.07941653329625,
       );
 
-      expect(validCheckIn, true);
+      expect(validCheckIn, isTrue);
     });
 
     test('~53 ft away can check in', () {
@@ -22,7 +22,7 @@ void main() {
         -71.0792381664025,
       );
 
-      expect(validCheckIn, true);
+      expect(validCheckIn, isTrue);
     });
 
     test('far away cannot check in', () {
@@ -34,7 +34,7 @@ void main() {
         -71.0790114604389,
       );
 
-      expect(validCheckIn, false);
+      expect(validCheckIn, isFalse);
     });
 
     test('~56 ft away cannot check in', () {
@@ -45,7 +45,7 @@ void main() {
         -71.07940,
       );
 
-      expect(validCheckIn, false);
+      expect(validCheckIn, isFalse);
     });
   });
 }
