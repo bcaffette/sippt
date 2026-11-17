@@ -27,7 +27,7 @@ void main() {
       };
 
       final profile = Profile.fromJson(data);
-      
+
       expect(profile.createdAt, equals(manualDate));
       expect(profile.createdAt.isUtc, isTrue);
     });

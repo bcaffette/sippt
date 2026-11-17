@@ -20,7 +20,7 @@ class Profile {
         throw FormatException('Profile JSON missing "$key"');
       }
     }
-    for (final key in nonNullKeys){
+    for (final key in nonNullKeys) {
       if (data[key] == null) {
         throw FormatException('Profile JSON "$key" field is null');
       }

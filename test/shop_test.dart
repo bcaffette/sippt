@@ -3,20 +3,23 @@ import 'package:test/test.dart';
 
 void main() {
   group('shop init', () {
-    test('supplying integers successfully makes double using Shop.fromJson', () {
-      const data = {
-        'id': 1,
-        'name': 'My Cozy Cafe',
-        'address': '800 Boylston St., Boston, MA, 02199',
-        'lat': 42.22,
-        'long': -71,
-      };
+    test(
+      'supplying integers successfully makes double using Shop.fromJson',
+      () {
+        const data = {
+          'id': 1,
+          'name': 'My Cozy Cafe',
+          'address': '800 Boylston St., Boston, MA, 02199',
+          'lat': 42.22,
+          'long': -71,
+        };
 
-      final shop = Shop.fromJson(data);
+        final shop = Shop.fromJson(data);
 
-      expect(shop.long, isA<double>());
-      expect(shop.long, equals(-71.0));
-    });
+        expect(shop.long, isA<double>());
+        expect(shop.long, equals(-71.0));
+      },
+    );
 
     test('every json value maps properly to the Shop fields', () {
       const data = {

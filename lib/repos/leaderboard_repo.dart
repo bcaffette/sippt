@@ -4,7 +4,7 @@ import 'package:supabase/supabase.dart';
 class LeaderboardRepo {
   final SupabaseClient client;
 
-  LeaderboardRepo({required this.client,});
+  LeaderboardRepo({required this.client});
 
   Future<List<Profile>> getLeaderboardAll() async {
     final List<Profile> lb = [];
