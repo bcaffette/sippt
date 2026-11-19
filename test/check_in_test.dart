@@ -48,7 +48,7 @@ void main() {
       expect(validCheckIn, isFalse);
     });
 
-    test('~54 ft away can check in', (){
+    test('~54 ft away can check in', () {
       bool validCheckIn = canCheckIn(
         42.35030,
         -71.07940,
