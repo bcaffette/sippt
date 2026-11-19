@@ -47,5 +47,16 @@ void main() {
 
       expect(validCheckIn, isFalse);
     });
+
+    test('~54 ft away can check in', (){
+      bool validCheckIn = canCheckIn(
+        42.35030,
+        -71.07940,
+        42.35044802,
+        -71.07940,
+      );
+
+      expect(validCheckIn, isTrue);
+    });
   });
 }
