@@ -1,4 +1,4 @@
-import 'package:sippt/profile.dart';
+import 'package:sippt/models/profile.dart';
 import 'package:supabase/supabase.dart';
 
 class LeaderboardRepo {

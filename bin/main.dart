@@ -1,5 +1,5 @@
 import 'package:dotenv/dotenv.dart';
-import 'package:sippt/profile.dart';
+import 'package:sippt/models/profile.dart';
 import 'package:sippt/repos/leaderboard_repo.dart';
 import 'package:supabase/supabase.dart';
 

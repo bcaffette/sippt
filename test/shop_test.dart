@@ -1,4 +1,4 @@
-import 'package:sippt/shop.dart';
+import 'package:sippt/models/shop.dart';
 import 'package:test/test.dart';
 
 void main() {
