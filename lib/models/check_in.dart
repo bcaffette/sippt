@@ -3,7 +3,7 @@ class CheckIn {
   final String userId;
   final int shopId;
   final int? ptsAwarded;
-  final String? quest_id;
+  final String? questId;
   final DateTime createdAt;
 
   CheckIn({
@@ -11,7 +11,7 @@ class CheckIn {
     required this.userId,
     required this.shopId,
     required this.ptsAwarded,
-    required this.quest_id,
+    required this.questId,
     required this.createdAt,
   });
 
@@ -31,7 +31,7 @@ class CheckIn {
       userId: data['user_id'] as String,
       shopId: data['shop_id'] as int,
       ptsAwarded: data['pts_awarded'] as int?,
-      quest_id: data['quest_id'] as String?,
+      questId: data['quest_id'] as String?,
       createdAt: DateTime.parse(data['created_at'] as String),
     );
   }
