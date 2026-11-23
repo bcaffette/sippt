@@ -17,22 +17,24 @@ class CheckIn {
 
   bool get success => ptsAwarded != null;
 
-  factory CheckIn.fromJson(Map<String, dynamic> data) {
-    if (!data.containsKey('shop_id')) {
-      throw FormatException('CheckIn JSON missing shop ID: $data');
-    }
-
-    if (!data.containsKey('pts_awarded')) {
-      throw FormatException('CheckIn JSON missing points awarded. $data');
-    }
-
-    return CheckIn(
-      id: data['id'] as String,
-      userId: data['user_id'] as String,
-      shopId: data['shop_id'] as int,
-      ptsAwarded: data['pts_awarded'] as int?,
-      questId: data['quest_id'] as String?,
-      createdAt: DateTime.parse(data['created_at'] as String),
-    );
+  factory CheckIn.fromJson(Map<String, dynamic> json) {
+    return switch (json) {
+      {
+        'id': String id,
+        'user_id': String userId,
+        'shop_id': int shopId,
+        'pts_awarded': int? ptsAwarded,
+        'created_at': String createdAt,
+      } =>
+        CheckIn(
+          id: id,
+          userId: userId,
+          shopId: shopId,
+          ptsAwarded: ptsAwarded,
+          questId: json['quest_id'] as String?,
+          createdAt: DateTime.parse(createdAt),
+        ),
+      _ => throw FormatException('Invalid CheckIn JSON: $json'),
+    };
   }
 }
