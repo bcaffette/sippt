@@ -7,7 +7,7 @@ class Profile {
   Profile({
     required this.id,
     required this.username,
-    this.pfpUrl,
+    required this.pfpUrl,
     required this.createdAt,
   });
 
