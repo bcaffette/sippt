@@ -11,26 +11,21 @@ class Profile {
     required this.createdAt,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> data) {
-    // validate required fields before casting
-    const requiredKeys = ['id', 'username', 'pfp_url', 'created_at'];
-    const nonNullKeys = ['id', 'username', 'created_at'];
-    for (final key in requiredKeys) {
-      if (!data.containsKey(key)) {
-        throw FormatException('Profile JSON missing "$key"');
-      }
-    }
-    for (final key in nonNullKeys) {
-      if (data[key] == null) {
-        throw FormatException('Profile JSON "$key" field is null');
-      }
-    }
-
-    return Profile(
-      id: data['id'] as String,
-      username: data['username'] as String,
-      pfpUrl: data['pfp_url'] as String?,
-      createdAt: DateTime.parse(data['created_at'] as String),
-    );
+  factory Profile.fromJson(Map<String, dynamic> json) {
+    return switch (json) {
+      {
+        'id': String id,
+        'username': String username,
+        'pfp_url': String? pfpUrl,
+        'created_at': String createdAt,
+      } =>
+        Profile(
+          id: id,
+          username: username,
+          pfpUrl: pfpUrl,
+          createdAt: DateTime.parse(createdAt),
+        ),
+      _ => throw FormatException('Invalid Profile JSON: $json'),
+    };
   }
 }
