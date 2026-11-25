@@ -13,7 +13,10 @@ void main() {
 
   setUpAll(() async {
     final env = DotEnv()..load();
-    supabase = SupabaseClient(env['SUPABASE_URL']!, env['SUPABASE_PUBLISHABLE_KEY']!);
+    supabase = SupabaseClient(
+      env['SUPABASE_URL']!,
+      env['SUPABASE_PUBLISHABLE_KEY']!,
+    );
     await supabase.auth.signInWithPassword(
       email: env['SIMUL_EMAIL']!,
       password: env['SIMUL_PW']!,
@@ -32,7 +35,11 @@ void main() {
     });
 
     test('outside 50 ft - unsuccessful, no points', () async {
-      final res = await checkInRepo.checkIn(shopId, outsideRadius.lat, outsideRadius.long);
+      final res = await checkInRepo.checkIn(
+        shopId,
+        outsideRadius.lat,
+        outsideRadius.long,
+      );
 
       expect(res.success, isFalse);
       expect(res.distanceFt, greaterThan(50));
