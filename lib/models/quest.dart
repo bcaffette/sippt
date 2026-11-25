@@ -1,11 +1,11 @@
 class Quest {
-  final String questId;
+  final String id;
   final int shopId;
   final int value;
   final DateTime expiresAt;
 
   Quest({
-    required this.questId,
+    required this.id,
     required this.shopId,
     required this.value,
     required this.expiresAt,
@@ -13,7 +13,7 @@ class Quest {
 
   factory Quest.fromJson(Map<String, dynamic> json) {
     return Quest(
-      questId: json['quest_id'] as String,
+      id: json['id'] as String,
       shopId: json['shop_id'] as int,
       value: json['value'] as int,
       expiresAt: DateTime.parse(json['expires_at'] as String),
