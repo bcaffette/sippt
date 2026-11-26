@@ -15,6 +15,7 @@ declare
   v_uid uuid;
   v_shop_lat float8;
   v_shop_long float8;
+  v_partner_id bigint;
   v_quest_id uuid;
   v_quest_value int;
   v_already_claimed boolean := false;
@@ -29,8 +30,8 @@ begin
     raise exception 'Not logged in';
   end if;
 
-  -- step 2: where is the shop?
-  select lat, long into v_shop_lat, v_shop_long
+  -- step 2: where is the shop, and which partner owns it?
+  select lat, long, partner_id into v_shop_lat, v_shop_long, v_partner_id
   from shops
   where id = p_shop_id;
 
@@ -38,14 +39,15 @@ begin
     raise exception 'Shop % does not exist', p_shop_id;
   end if;
 
-  -- step 3: is there an active quest at this shop? if not, keep quest info as null
+  -- step 3: does this partner have an active quest? if not, keep quest info as null
   select id, value into v_quest_id, v_quest_value
   from quests
-  where shop_id = p_shop_id
+  where partner_id = v_partner_id
     and now() < expires_at
+  order by expires_at asc
   limit 1;
 
-  -- step 4: if a quest is found, has this user already claimed it? if so, they get no quest value
+  -- step 4: if a quest is found, has this user already claimed it (at any of the partner's shops)?
   if v_quest_id is not null then
     select exists (
       select 1 from check_ins
@@ -60,17 +62,16 @@ begin
     end if;
   end if;
 
-  -- step 5: calculate distance to shop (haversine)
-  v_distance_ft := 2 * c_earth_radius_ft * asin(sqrt(
+  -- step 5: calculate distance to this specific shop (haversine)
+  v_distance_ft := 2 * c_earth_radius_ft * asin(least(1, sqrt(
     power(sin(radians(p_lat - v_shop_lat) / 2), 2)
     + cos(radians(v_shop_lat)) * cos(radians(p_lat))
     * power(sin(radians(p_long - v_shop_long) / 2), 2)
-  ));
+  )));
 
   v_in_range := v_distance_ft <= c_check_in_radius_ft;
 
-  -- step 6: if in range, then get the points awarded. if already claimed, but not a failure, then 0 points.
-  -- if not in range, no points awarded, and represent a failed check in
+  -- step 6: in range -> quest value (or 0 if none / already claimed). out of range -> null (failed check-in)
   if v_in_range then
     v_pts_awarded := coalesce(v_quest_value, 0);
   else
