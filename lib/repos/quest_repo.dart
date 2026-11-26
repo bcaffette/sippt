@@ -10,11 +10,11 @@ class QuestRepo {
     final List<Quest> quests = [];
     final res = await client
         .from('quests')
-        .select('shop_id, value, expires_at, shops(name)')
+        .select('partner_id, value, expires_at, partners(name)')
         .gt('expires_at', DateTime.now().toUtc().toIso8601String());
 
-    for (final Map<String, dynamic> q in res) {
-      final quest = Quest.fromJson(q);
+    for (final qMap in res) {
+      final quest = Quest.fromJson(qMap);
       quests.add(quest);
     }
 
