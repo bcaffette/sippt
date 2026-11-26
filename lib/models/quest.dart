@@ -19,4 +19,9 @@ class Quest {
       expiresAt: DateTime.parse(json['expires_at'] as String),
     );
   }
+
+  @override
+  String toString() {
+    return 'Quest(Shop: $partnerName, Points: $value, Expires: ${expiresAt.toLocal()})';
+  }
 }

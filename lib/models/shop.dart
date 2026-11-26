@@ -22,4 +22,9 @@ class Shop {
       long: (json['long'] as num).toDouble(),
     );
   }
+
+  @override
+  String toString() {
+    return 'Shop(Shop: $name, Address: $address, [$lat, $long])';
+  }
 }
